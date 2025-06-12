@@ -32,6 +32,7 @@ class Home extends StatelessWidget {
   }
 
     return  Scaffold(
+      backgroundColor: Colors.amber[50],
       appBar: AppBar(
         title: Text("H e l l o",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20),),
         centerTitle: true,
@@ -41,83 +42,79 @@ class Home extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
           children: [
-        
-            SizedBox(
-              height: MediaQuery.sizeOf(context).height*0.76,
-              child:  Consumer<MessageProvider>(
-                builder: (BuildContext context, MessageProvider value, Widget? child) { 
-                  List<Map<String,String>> msgs = value.getMsgs;
-                  return msgs.isEmpty ? Center(child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        width: 300,
-                        alignment: Alignment.center,
-                        "assets/chat.png"),
-                        SizedBox(
-                          height: 20,
-                        ),
-                      Text("Start a Chat ",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w400),),
-                    ],
-                  )) :
-                   ListView.builder(
-                  itemCount: msgs.length,
-                  itemBuilder:(context, index) => MessageTextWidget(msg: msgs[index]["msg"].toString(),auth: msgs[index]["auth"].toString(),));
-                  }
+            Padding(
+              padding: const EdgeInsets.only(bottom: 64),
+              child: SizedBox(
+                child:  Consumer<MessageProvider>(
+                  builder: (BuildContext context, MessageProvider value, Widget? child) { 
+                    List<Map<String,String>> msgs = value.getMsgs;
+                    return msgs.isEmpty ? Center(child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          width: 300,
+                          alignment: Alignment.center,
+                          "assets/chat.png"),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        Text("Start a Chat ",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w400),),
+                      ],
+                    )) :
+                     ListView.builder(
+                    itemCount: msgs.length,
+                    itemBuilder:(context, index) => MessageTextWidget(msg: msgs[index]["msg"].toString(),auth: msgs[index]["auth"].toString(),));
+                    }
+                ),
+                
+                        
+                 
               ),
-  
-               
             ),
         
         
         
         
         
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16,),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 8),
-                  child: TextField(
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black
-                    ),
-                    keyboardType: TextInputType.text,
-                    controller: msg_controller,
-                    decoration: InputDecoration(
-                      hintText: "Ask a question",
-                      hintStyle: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black
-                    ),
-                    fillColor: Colors.black,
-                    border: UnderlineInputBorder(borderSide: BorderSide(
-                      color: Colors.black
-                    )) ,
-                    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(
-                      color: Colors.black
-                    ))                      
-                    ),
-                    
+            Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 8),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(24),
                   ),
-                ),
-              ),
-              IconButton(onPressed: ()async{
-                addMsg();
-              }, icon: Consumer<IsLoading>(builder: (_, provider,_) => provider.isloading() ? CircularProgressIndicator() : Icon(Icons.send),
-              ),
-              iconSize: 28,
-              color: Colors.black,),
-              
-                ],
+                  padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                  child: TextField(
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black
+                          ),
+                          keyboardType: TextInputType.text,
+                          controller: msg_controller,
+                          decoration: InputDecoration(
+                            hintText: "Ask a question",
+                            hintStyle: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black
+                          ),
+                          fillColor: Colors.black,
+                          border: InputBorder.none,
+                          suffixIcon: IconButton(onPressed: ()async{
+                           addMsg();
+                      }, icon: Consumer<IsLoading>(builder: (_, provider,_) => provider.isloading() ? CircularProgressIndicator() : Icon(Icons.send),
+                      ),
+                      iconSize: 28,
+                      color: Colors.black,),               
+                          ),
+                          
+                          ),
+                )
               ),
             ),
           ],
