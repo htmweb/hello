@@ -1,16 +1,6 @@
-# hello
+# Hello - Chat application based on GeminiAI
 
-A new Flutter project.
+Users can interact with the GeminiAI by sending messages.
+Users can copy responses to the clipboard.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![hello](https://github.com/user-attachments/assets/bbce748d-f578-427a-a2f7-499ab73c77c7)
