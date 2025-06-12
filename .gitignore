@@ -46,4 +46,4 @@ app.*.map.json
 
 
 #firebase
-firebase.json
+/firebase.json
